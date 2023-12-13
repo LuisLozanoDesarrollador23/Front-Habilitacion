@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { GetListMachine, DeleteMachine, AddMachine, UpdateMachine } from '../../ClientApi/MachineApi';
 import TableMachine from './TableMachine';
-import MachineForm from './MachineForm';
+import MachineForm from './UserForm';
 
 function Machine() {
 
