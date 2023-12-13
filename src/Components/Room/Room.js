@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { GetListMachine, DeleteMachine, AddMachine, UpdateMachine } from '../../ClientApi/MachineApi';
+import { GetListMachine, DeleteMachine, AddMachine, UpdateMachine } from '../../ClientApi/HotelApi';
 import TableMachine from './TableRoom';
 import MachineForm from './RoomForm';
 

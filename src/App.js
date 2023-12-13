@@ -1,4 +1,5 @@
 import './App.css';
+import Router from "./Components/General/Router";
 
 function App() {
   return (

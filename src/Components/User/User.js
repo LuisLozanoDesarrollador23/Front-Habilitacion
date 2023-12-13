@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { GetListMachine, DeleteMachine, AddMachine, UpdateMachine } from '../../ClientApi/MachineApi';
-import TableMachine from './TableMachine';
-import MachineForm from './MachineForm';
+import { GetListMachine, DeleteMachine, AddMachine, UpdateMachine } from '../../ClientApi/HotelApi';
+import TableUser from "./TableUser";
+import UserForm from "./UserForm";
 
 function Machine() {
 
@@ -60,8 +60,8 @@ function Machine() {
     <div>
       {viewList && <button className='btn btn-secondary mb-3 mt-3' onClick={verLista}>Ver Lista</button>}
       {!viewList && <button className='btn btn-primary mb-3 mt-3' onClick={verLista}>Crear nuevo registro</button>}
-      {viewList && <MachineForm onSave={guardar} setMachine={machine}></MachineForm>}
-      {!viewList && <TableMachine Machines={machines} onDelete={eliminar} onView={ver} />}
+      {viewList && <UserForm onSave={guardar} setMachine={machine}></UserForm>}
+      {!viewList && <TableUser Machines={machines} onDelete={eliminar} onView={ver} />}
     </div>
   )
 }
