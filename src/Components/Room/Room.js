@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { GetListMachine, DeleteMachine, AddMachine, UpdateMachine } from '../../ClientApi/MachineApi';
+import { GetListHotels, DeleteHotel, AddHotel, UpdateHotel } from '../../ClientApi/HotelApi';
 import TableMachine from './TableRoom';
 import MachineForm from './RoomForm';
 
@@ -10,7 +10,7 @@ function Machine() {
   const [viewList, setViewList] = useState(true);
 
   const Listar = () => {
-    GetListMachine().then((data) => {
+    GetListHotels().then((data) => {
       setmachines(data)      
     }).catch((err) => { console.log(err) })
   }
@@ -37,15 +37,15 @@ function Machine() {
 
   const guardar = (machine) => {
     if (machine._id === null) {
-      AddMachine(machine).then((data) => { Listar() }).catch((err) => { console.log(err) })
+      AddHotel(machine).then((data) => { Listar() }).catch((err) => { console.log(err) })
     } else {
-      UpdateMachine(machine).then((data) => { Listar() }).catch((err) => { console.log(err) })
+      UpdateHotel(machine).then((data) => { Listar() }).catch((err) => { console.log(err) })
     }
     setViewList(true);
   }
 
   const eliminar = (id) => {
-    DeleteMachine(id).then((data) => {
+    DeleteHotel(id).then((data) => {
       if (data.message !== "")
         Listar();
     }).catch((err) => { console.log(err) })

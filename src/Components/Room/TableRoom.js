@@ -1,9 +1,6 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-
-
 
 function TableMachine(props) {
   const { Machines, onDelete, onView } = props;
