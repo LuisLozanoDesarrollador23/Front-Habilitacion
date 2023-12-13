@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { GetListMachine, DeleteMachine, AddMachine, UpdateMachine } from '../../ClientApi/MachineApi';
-import TableMachine from './TableMachine';
-import MachineForm from './UserForm';
+import { GetListuser, Deleteuser, Adduser, Updateuser } from '../../ClientApi/UserApi';
+import TableUser from './TableUser';
+import UserForm from './UserForm';
 
-function Machine() {
+function User() {
 
-  const [machines, setmachines] = useState([]);
-  const [machine, setMachine] = useState(null);
+  const [Users, setUsers] = useState([]);
+  const [User, setUser] = useState(null);
   const [viewList, setViewList] = useState(true);
 
   const Listar = () => {
-    GetListMachine().then((data) => {
-      setmachines(data)      
+    GetListuser().then((data) => {
+      setUsers(data)      
     }).catch((err) => { console.log(err) })
   }
 
-  if (machines.length === 0)
+  if (Users.length === 0)
     Listar();
 
   const verLista = (e) => {
@@ -23,36 +23,66 @@ function Machine() {
       setViewList(false);
     } else {
       setViewList(true);
-      setMachine({
+      setUser({
         _id: null,
+        idType: "",
+        idNumber: "",
         name: "",
-        serial: "",
-        price: 0,
-        stock: 0,
-        status: true,
-        characteristics: ""
+        nationality: "",
+        phone: "",
+        rol: "",
+        state: "",
+        municipality: "",
+        address: "",
+        dateOfBirth: null,
+        gender: "",
+        email: "",
+        companions: [
+          {      
+            document: {
+              type: String,
+              required: true,
+            },
+            name: {
+              type: String,
+              required: true,
+            },
+            dateOfBirth: {
+              type: Date,
+              required: true,
+            },
+            gender: {
+              type: String,
+              required: true,
+            },
+            idType: {
+              type: String,
+              required: true,
+            },
+          },
+        ],
       })
     }
   }
 
-  const guardar = (machine) => {
-    if (machine._id === null) {
-      AddMachine(machine).then((data) => { Listar() }).catch((err) => { console.log(err) })
+  const guardar = (User) => {
+    if (User._id === null) {
+      Adduser(User).then((data) => { Listar() }).catch((err) => { console.log(err) })
     } else {
-      UpdateMachine(machine).then((data) => { Listar() }).catch((err) => { console.log(err) })
+      Updateuser(User).then((data) => { Listar() }).catch((err) => { console.log(err) })
     }
     setViewList(true);
   }
 
   const eliminar = (id) => {
-    DeleteMachine(id).then((data) => {
+    Deleteuser(id).then((data) => {
       if (data.message !== "")
         Listar();
     }).catch((err) => { console.log(err) })
   }
 
-  const ver = (machine) => {
-    setMachine(machine);
+  const ver = (User) => {
+    setUser(User);
     setViewList(false);
   }
 
@@ -60,10 +90,10 @@ function Machine() {
     <div>
       {viewList && <button className='btn btn-secondary mb-3 mt-3' onClick={verLista}>Ver Lista</button>}
       {!viewList && <button className='btn btn-primary mb-3 mt-3' onClick={verLista}>Crear nuevo registro</button>}
-      {viewList && <MachineForm onSave={guardar} setMachine={machine}></MachineForm>}
-      {!viewList && <TableMachine Machines={machines} onDelete={eliminar} onView={ver} />}
+      {viewList && <UserForm onSave={guardar} setUser={User}></UserForm>}
+      {!viewList && <TableUser Users={Users} onDelete={eliminar} onView={ver} />}
     </div>
   )
 }
 
-export default Machine;
+export default User;
