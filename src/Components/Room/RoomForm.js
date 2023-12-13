@@ -1,80 +1,124 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 
 
 function RoomForm(props) {
-    const {getRoom,setRoom,onSave} = props;
-    const[thisMachine, SetThisMachine] = useState({
-        _id:null,
-        name:"",
-        serial:"",
-        price:0,
-        stock:0,
-        status:"",
-        characteristics:""
+    const {getRoom, setRoom, onSave} = props;
+    const [thisRoom, SetThisRoom] = useState({
+        dateInit: null,
+        dateFinish: null,
+        amount: 0,
+        price: 0,
+        status: "",
+        resposibleUser:
+            {
+                idType: "",
+                idNumber: "",
+                name: "",
+                nationality: "",
+                phone: "",
+                rol: "",
+                state: "",
+                municipality: "",
+                address: "",
+                dateOfBirth: "",
+                gender: "",
+                email: "",
+            },
+        companions: [
+            {
+                document: "",
+                name: "",
+                dateOfBirth: "",
+                gender: "",
+                idType: "",
+            },
+        ],
     })
 
-    const limpiar = () =>{
+    const limpiar = () => {
         console.log('Limpia')
-        SetThisMachine({
-        _id:null,
-        name:"",
-        serial:"",
-        price:0,
-        stock:0,
-        status:"",
-        characteristics:""
-        })  
+        SetThisRoom({
+            dateInit: null,
+            dateFinish: null,
+            amount: 0,
+            price: 0,
+            status: "",
+            resposibleUser:
+                {
+                    idType: "C.C",
+                    idNumber: "123456789",
+                    name: "Luis Francisco",
+                    nationality: "Colombiano",
+                    phone: "3124567891",
+                    rol: "Agente",
+                    state: "Validado",
+                    municipality: "Santander",
+                    address: "Dirección de prueba",
+                    dateOfBirth: "2018-02-12",
+                    gender: "Masculino",
+                    email: "luisfrancisco@correo.com",
+                },
+            companions: [],
+        })
     }
 
     useEffect(() => {
-        if (setRoom){
+        if (setRoom) {
             console.log(setRoom)
-            SetThisMachine(setRoom);
+            SetThisRoom(setRoom);
         }
     }, [])
 
-    if (thisMachine === null){
+    if (thisRoom === null) {
         limpiar();
     }
 
     const handleChange = (e) => {
-        SetThisMachine({
-            ...thisMachine,[e.target.name]:e.target.value
-        });        
+        SetThisRoom({
+            ...thisRoom, [e.target.name]: e.target.value
+        });
     };
 
     const onClickGuardar = (e) => {
         e.preventDefault();
-        thisMachine.status = true;
-        onSave(thisMachine);
+        onSave(thisRoom);
         limpiar();
     };
- 
-  return (
-    <div>
-      <div className='Login-contener'>
-        <h1>Registro de </h1>
-        <div className="row">
-            <div className="col-6">
-                <input className='form-control col-6' placeholder='Nombre' name='name' value={thisMachine.name} onChange={(e) => {handleChange(e)}}></input>
+
+    return (
+        <div>
+            <div className='Login-contener'>
+                <h1>Registro de reservas</h1>
+                <div className="row">
+                    <div className="col-6">
+                        <input type="date" className='form-control col-6' placeholder='F. inicio' name='dateInit'
+                               value={thisRoom.dateInit} onChange={(e) => {
+                            handleChange(e)
+                        }}></input>
+                    </div>
+                    <div className="col-6">
+                        <input type="date" className='form-control col-6' placeholder='F. inicio' name='dateFinish'
+                               value={thisRoom.dateFinish} onChange={(e) => {
+                            handleChange(e)
+                        }}></input>
+                    </div>
+                    <div className="col-6">
+                        <input className='form-control col-6 mt-3' placeholder='Cantidad' name='amount' type='number'
+                               value={thisRoom.amount} onChange={(e) => {
+                            handleChange(e)
+                        }}></input>
+                    </div>
+                    <div className="col-6">
+                        <input className='form-control col-6 mt-3' placeholder='Estado' name='status' type='text'
+                               value={thisRoom.status} onChange={(e) => {
+                            handleChange(e)
+                        }}></input>
+                    </div>
+                </div>
             </div>
-            <div className="col-6">
-                <input className='form-control col-6' placeholder='Serial' name='serial' value={thisMachine.serial} onChange={(e) => {handleChange(e)}}></input>
-            </div>
-            <div className="col-6">
-                <input className='form-control col-6 mt-3' placeholder='Precio' name='price' type='number' value={thisMachine.price} onChange={(e) => {handleChange(e)}}></input>
-            </div>
-            <div className="col-6">
-                <input className='form-control col-6 mt-3' placeholder='Stock' name='stock' type='number' value={thisMachine.stock} onChange={(e) => {handleChange(e)}}></input>
-            </div>
-            <div className="col-6">
-                <input className='form-control col-6 mt-3' placeholder='Caracteristicas' name='characteristics' value={thisMachine.characteristics} onChange={(e) => {handleChange(e)}}></input>
-            </div>
+            <button className='mt-3 btn btn-primary' onClick={onClickGuardar}>Registrar</button>
         </div>
-        </div>
-        <button className='mt-3 btn btn-primary' onClick={onClickGuardar}>Registrar</button>
-    </div>
-  )
+    )
 }
 
 export default RoomForm;
