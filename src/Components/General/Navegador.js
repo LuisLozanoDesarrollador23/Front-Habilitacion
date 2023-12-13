@@ -9,11 +9,11 @@ const Navegador = () => {
           <MenuLink to="/">
           Home
           </MenuLink>
-          <MenuLink to="/Admin">
-            Usario
+          <MenuLink to="/User">
+            Usuario
           </MenuLink>
-          <MenuLink to="/Machine">
-          Reserva
+          <MenuLink to="/Room">
+          Habitaciones
           </MenuLink>                    
         </Menu>
       </PrimaryNav>
