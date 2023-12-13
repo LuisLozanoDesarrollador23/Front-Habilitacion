@@ -3,7 +3,7 @@ const url = "http://127.0.0.1:3000/hotel/";
 export async function GetListHotels() {
     const res = await fetch(url);
     const data = await res.json();
-    return data;
+    return data[0];
 }
 
 export async function AddHotel(hotel) {

@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { GetListHotels, DeleteHotel, AddHotel, UpdateHotel } from '../../ClientApi/HotelApi';
 import TableMachine from './TableRoom';
-import MachineForm from './RoomForm';
+import RoomForm from './RoomForm';
+import TableRoom from "./TableRoom";
 
-function Machine() {
+function Room() {
 
-  const [machines, setmachines] = useState([]);
-  const [machine, setMachine] = useState(null);
+  const [rooms, setRooms] = useState([]);
+  const [room, setRoom] = useState(null);
   const [viewList, setViewList] = useState(true);
 
   const Listar = () => {
     GetListHotels().then((data) => {
-      setmachines(data)      
+      setRooms(data.rooms)
+      console.log(data)
     }).catch((err) => { console.log(err) })
   }
 
-  if (machines.length === 0)
+  if (rooms.length === 0)
     Listar();
 
   const verLista = (e) => {
@@ -23,7 +25,7 @@ function Machine() {
       setViewList(false);
     } else {
       setViewList(true);
-      setMachine({
+      setRoom({
         _id: null,
         name: "",
         serial: "",
@@ -52,18 +54,18 @@ function Machine() {
   }
 
   const ver = (machine) => {
-    setMachine(machine);
+    setRoom(machine);
     setViewList(false);
   }
 
   return (
     <div>
-      {viewList && <button className='btn btn-secondary mb-3 mt-3' onClick={verLista}>Ver Lista</button>}
-      {!viewList && <button className='btn btn-primary mb-3 mt-3' onClick={verLista}>Crear nuevo registro</button>}
-      {viewList && <MachineForm onSave={guardar} setMachine={machine}></MachineForm>}
-      {!viewList && <TableMachine Machines={machines} onDelete={eliminar} onView={ver} />}
+      {!viewList && <button className='btn btn-secondary mb-3 mt-3' onClick={verLista}>Ver Lista</button>}
+      {viewList && <button className='btn btn-primary mb-3 mt-3' onClick={verLista}>Crear nuevo registro</button>}
+      {!viewList && <RoomForm onSave={guardar} setRoom={room}></RoomForm>}
+      {viewList && <TableRoom Rooms={rooms} onDelete={eliminar} onView={ver} />}
     </div>
   )
 }
 
-export default Machine;
+export default Room;

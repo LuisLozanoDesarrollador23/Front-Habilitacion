@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
 
-function MachineForm(props) {
-    const {getMachine,setMachine,onSave} = props;
+function RoomForm(props) {
+    const {getRoom,setRoom,onSave} = props;
     const[thisMachine, SetThisMachine] = useState({
         _id:null,
         name:"",
@@ -27,9 +27,9 @@ function MachineForm(props) {
     }
 
     useEffect(() => {
-        if (setMachine){
-            console.log(setMachine)
-            SetThisMachine(setMachine);
+        if (setRoom){
+            console.log(setRoom)
+            SetThisMachine(setRoom);
         }
     }, [])
 
@@ -53,16 +53,28 @@ function MachineForm(props) {
   return (
     <div>
       <div className='Login-contener'>
-        <h1>Registro de Maquinas</h1>        
-        <input className='Input col-6' placeholder='Nombre' name='name' value={thisMachine.name} onChange={(e) => {handleChange(e)}}></input>
-        <input className='Input col-6' placeholder='Serial' name='serial' value={thisMachine.serial} onChange={(e) => {handleChange(e)}}></input>
-        <input className='Input col-6 mt-3' placeholder='Precio' name='price' type='number' value={thisMachine.price} onChange={(e) => {handleChange(e)}}></input>
-        <input className='Input col-6 mt-3' placeholder='Stock' name='stock' type='number' value={thisMachine.stock} onChange={(e) => {handleChange(e)}}></input>
-        <input className='Input col-6 mt-3' placeholder='Caracteristicas' name='characteristics' value={thisMachine.characteristics} onChange={(e) => {handleChange(e)}}></input>
+        <h1>Registro de </h1>
+        <div className="row">
+            <div className="col-6">
+                <input className='form-control col-6' placeholder='Nombre' name='name' value={thisMachine.name} onChange={(e) => {handleChange(e)}}></input>
+            </div>
+            <div className="col-6">
+                <input className='form-control col-6' placeholder='Serial' name='serial' value={thisMachine.serial} onChange={(e) => {handleChange(e)}}></input>
+            </div>
+            <div className="col-6">
+                <input className='form-control col-6 mt-3' placeholder='Precio' name='price' type='number' value={thisMachine.price} onChange={(e) => {handleChange(e)}}></input>
+            </div>
+            <div className="col-6">
+                <input className='form-control col-6 mt-3' placeholder='Stock' name='stock' type='number' value={thisMachine.stock} onChange={(e) => {handleChange(e)}}></input>
+            </div>
+            <div className="col-6">
+                <input className='form-control col-6 mt-3' placeholder='Caracteristicas' name='characteristics' value={thisMachine.characteristics} onChange={(e) => {handleChange(e)}}></input>
+            </div>
         </div>
-        <button className='mt-3' onClick={onClickGuardar}>Registrar</button>      
+        </div>
+        <button className='mt-3 btn btn-primary' onClick={onClickGuardar}>Registrar</button>
     </div>
   )
 }
 
-export default MachineForm;
+export default RoomForm;
